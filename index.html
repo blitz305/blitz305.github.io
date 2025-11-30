@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blitz - 个人主页</title>
+    <title>张文龙 | Wenlong Zhang</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,275 +14,340 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: #fff;
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #333;
+            line-height: 1.7;
+            background: #fff;
         }
 
-        /* 动态背景粒子效果 */
-        .bg-animation {
+        a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* 导航栏 */
+        nav {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
+            right: 0;
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 100;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
         }
 
-        .bg-animation span {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: float 15s infinite;
+        .nav-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #1a1a1a;
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(720deg);
-                opacity: 0;
-            }
+        .nav-links {
+            display: flex;
+            gap: 30px;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        .nav-links a {
+            color: #555;
+            font-size: 0.9em;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+            text-decoration: none;
+        }
+
+        /* Banner */
+        .banner {
+            margin-top: 60px;
+            height: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
-            z-index: 1;
+            overflow: hidden;
         }
 
-        /* 头部卡片 */
-        .hero {
+        .banner-placeholder {
+            color: rgba(255,255,255,0.6);
+            font-size: 1.2em;
+        }
+
+        .banner-title {
+            position: absolute;
+            bottom: 40px;
+            left: 60px;
+            color: #fff;
+            font-size: 2.5em;
+            font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* 主体内容 */
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 50px 40px;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                padding: 30px 20px;
+            }
+            nav {
+                padding: 0 20px;
+            }
+            .nav-links {
+                gap: 15px;
+            }
+            .nav-links a {
+                font-size: 0.8em;
+            }
+            .banner-title {
+                left: 20px;
+                font-size: 2em;
+            }
+        }
+
+        /* 左侧 - 头像和联系 */
+        .sidebar {
             text-align: center;
-            padding: 60px 40px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 30px;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .avatar {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3em;
-            margin: 0 auto 20px;
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
-            animation: pulse 2s infinite;
+            color: #6366f1;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
-            }
-            50% {
-                box-shadow: 0 10px 60px rgba(102, 126, 234, 0.6);
-            }
-        }
-
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .bio {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.2em;
-        }
-
-        /* 卡片通用样式 */
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .section-title {
-            font-size: 1.4em;
-            margin-bottom: 20px;
+        .sidebar-links {
             display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .sidebar-links a {
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #f3f4f6;
+            border-radius: 6px;
+            color: #555;
+            font-size: 0.85em;
+            transition: all 0.2s;
         }
 
-        .section-title i {
-            color: #667eea;
+        .sidebar-links a:hover {
+            background: #2563eb;
+            color: #fff;
+            text-decoration: none;
         }
 
-        /* 技能标签 */
-        .skills {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
+        /* 右侧内容 */
+        .content h1 {
+            font-size: 1.8em;
+            color: #6366f1;
+            margin-bottom: 5px;
         }
 
-        .skill-tag {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 8px 20px;
-            border-radius: 25px;
+        .content h1 span {
+            color: #1a1a1a;
+            margin-left: 10px;
+        }
+
+        .intro {
+            color: #555;
+            margin: 20px 0 30px;
+            font-size: 0.95em;
+        }
+
+        /* 区块标题 */
+        .section-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 35px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        /* 教育背景 */
+        .education-item {
+            margin-bottom: 15px;
+        }
+
+        .education-item strong {
+            color: #1a1a1a;
+        }
+
+        .education-item p {
+            color: #666;
             font-size: 0.9em;
-            font-weight: 500;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
-            padding: 8px 0;
-            color: rgba(255, 255, 255, 0.8);
         }
 
         /* 研究方向 */
-        .focus-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            margin-bottom: 12px;
-            transition: background 0.3s ease;
+        .research-list {
+            list-style: none;
         }
 
-        .focus-item:hover {
-            background: rgba(255, 255, 255, 0.08);
+        .research-list li {
+            padding: 6px 0;
+            padding-left: 18px;
+            position: relative;
+            color: #555;
+            font-size: 0.95em;
         }
 
-        .focus-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+        .research-list li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #6366f1;
         }
 
-        /* 项目展示 */
-        .project-placeholder {
-            text-align: center;
-            padding: 40px;
-            border: 2px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            color: rgba(255, 255, 255, 0.5);
+        /* 页面区块 */
+        .page-section {
+            display: none;
+            padding: 50px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        /* 座右铭 */
-        .quote {
-            font-size: 1.2em;
+        .page-section.active {
+            display: block;
+        }
+
+        .page-section h2 {
+            font-size: 1.5em;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .page-section h2.sub-section {
+            margin-top: 50px;
+        }
+
+        /* 论文列表 */
+        .publication-item {
+            padding: 20px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .publication-item:last-child {
+            border-bottom: none;
+        }
+
+        .pub-title {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+
+        .pub-authors {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .pub-authors .me {
+            color: #6366f1;
+            font-weight: 600;
+        }
+
+        .pub-venue {
+            font-size: 0.85em;
+            color: #888;
             font-style: italic;
-            text-align: center;
-            padding: 30px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
-            border-radius: 12px;
-            border-left: 4px solid #667eea;
         }
 
-        /* 联系方式 */
-        .contact-links {
+        .pub-links {
+            margin-top: 8px;
+        }
+
+        .pub-links a {
+            font-size: 0.8em;
+            margin-right: 15px;
+            color: #2563eb;
+        }
+
+        /* 获奖列表 */
+        .award-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
         }
 
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            color: #fff;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .award-item:last-child {
+            border-bottom: none;
         }
 
-        .contact-link:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        .award-name {
+            font-weight: 500;
+            color: #1a1a1a;
         }
 
-        .contact-link i {
-            font-size: 1.2em;
+        .award-org {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .award-year {
+            color: #888;
+            font-size: 0.9em;
+            white-space: nowrap;
         }
 
         /* 项目卡片 */
         .project-item {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
             padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .project-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(102, 126, 234, 0.3);
+            margin-bottom: 25px;
         }
 
         .project-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 12px;
@@ -290,31 +355,23 @@
 
         .project-name {
             font-size: 1.1em;
-            margin: 0;
+            font-weight: 600;
+            color: #1a1a1a;
         }
 
         .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
-            color: #fff;
-            text-decoration: none;
             font-size: 0.85em;
-            transition: all 0.3s ease;
-        }
-
-        .project-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .project-desc {
-            color: rgba(255, 255, 255, 0.7);
+            color: #555;
             margin-bottom: 15px;
-            line-height: 1.6;
+            font-size: 0.95em;
+            line-height: 1.7;
         }
 
         .project-tags {
@@ -325,141 +382,175 @@
         }
 
         .tag {
-            background: rgba(102, 126, 234, 0.2);
-            color: #a8b4ff;
-            padding: 4px 12px;
-            border-radius: 15px;
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 4px 10px;
+            border-radius: 4px;
             font-size: 0.8em;
         }
 
         .project-highlights {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
             font-size: 0.9em;
-            color: rgba(255, 255, 255, 0.6);
+            color: #666;
+            padding-left: 20px;
+        }
+
+        .project-highlights li {
+            margin-bottom: 5px;
+        }
+
+        /* Placeholder 样式 */
+        .placeholder {
+            background: #f9fafb;
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            color: #9ca3af;
         }
 
         /* 页脚 */
         footer {
             text-align: center;
             padding: 30px;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.9em;
+            color: #999;
+            font-size: 0.85em;
+            border-top: 1px solid #e5e7eb;
         }
     </style>
 </head>
 
 <body>
-    <!-- 背景动画 -->
-    <div class="bg-animation">
-        <span style="left: 10%; animation-delay: 0s;"></span>
-        <span style="left: 20%; animation-delay: 2s;"></span>
-        <span style="left: 30%; animation-delay: 4s;"></span>
-        <span style="left: 40%; animation-delay: 1s;"></span>
-        <span style="left: 50%; animation-delay: 3s;"></span>
-        <span style="left: 60%; animation-delay: 5s;"></span>
-        <span style="left: 70%; animation-delay: 2.5s;"></span>
-        <span style="left: 80%; animation-delay: 4.5s;"></span>
-        <span style="left: 90%; animation-delay: 1.5s;"></span>
+    <!-- 导航栏 -->
+    <nav>
+        <span class="nav-name">Wenlong Zhang</span>
+        <div class="nav-links">
+            <a href="#home" class="active" onclick="showPage('home')">Home</a>
+            <a href="#publications" onclick="showPage('publications')">Publications & Awards</a>
+            <a href="#projects" onclick="showPage('projects')">Projects</a>
+        </div>
+    </nav>
+
+    <!-- Banner -->
+    <div class="banner">
+        <span class="banner-placeholder">[ Banner 图片占位 ]</span>
+        <div class="banner-title">Bioinformatics</div>
     </div>
 
-    <div class="container">
-        <!-- 头部 -->
-        <header class="hero">
-            <div class="avatar">👋</div>
-            <h1>Hi, I'm Wenlong Zhang!</h1>
-            <p class="bio">🎓 南方医科大学 · 生物信息学本科在读</p>
-        </header>
-
-        <!-- 技能 -->
-        <section class="card" style="animation-delay: 0.1s;">
-            <div class="section-title">
-                <i class="fas fa-code"></i> 技能栈
-            </div>
-            <div class="skills">
-                <span class="skill-tag">R</span>
-                <span class="skill-tag">Python</span>
-            </div>
-            <ul class="skill-list">
-                <li>📊 <strong>R：</strong>数据可视化、生存分析</li>
-                <li>🐍 <strong>Python：</strong>机器学习基础、数据预处理</li>
-            </ul>
-        </section>
-
-        <!-- 研究方向 -->
-        <section class="card" style="animation-delay: 0.2s;">
-            <div class="section-title">
-                <i class="fas fa-rocket"></i> 当前研究方向
-            </div>
-            <div class="focus-item">
-                <div class="focus-icon"><i class="fas fa-database"></i></div>
-                <div>构建生物医学数据集的数据处理流程</div>
-            </div>
-            <div class="focus-item">
-                <div class="focus-icon"><i class="fas fa-brain"></i></div>
-                <div>将机器学习模型应用于健康与基因组数据</div>
-            </div>
-            <div class="focus-item">
-                <div class="focus-icon"><i class="fas fa-cogs"></i></div>
-                <div>R 与 Python 的工作流自动化整合</div>
-            </div>
-        </section>
-
-        <!-- 项目展示 -->
-        <section class="card" style="animation-delay: 0.3s;">
-            <div class="section-title">
-                <i class="fas fa-flask"></i> 项目展示
-            </div>
-            
-            <div class="project-item">
-                <div class="project-header">
-                    <h3 class="project-name">🧠 UKB 身体活动规律性与痴呆风险研究</h3>
-                    <a href="https://github.com/blitz305/ukb-pa-regularity-dementia" target="_blank" class="project-link">
-                        <i class="fab fa-github"></i> 查看仓库
-                    </a>
+    <!-- HOME 页面 -->
+    <div id="home" class="page-section active">
+        <div class="main-content">
+            <!-- 左侧边栏 -->
+            <aside class="sidebar">
+                <div class="avatar">
+                    <i class="fas fa-user"></i>
                 </div>
-                <p class="project-desc">
-                    基于 UK Biobank 加速度计数据，构建身体活动规律性评分体系，分析其与痴呆发病风险及认知功能的关联。
+                <div class="sidebar-links">
+                    <a href="mailto:welon0725@outlook.com"><i class="fas fa-envelope"></i> welon0725@outlook.com</a>
+                    <a href="https://github.com/blitz305" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </aside>
+
+            <!-- 右侧内容 -->
+            <div class="content">
+                <h1>Wenlong Zhang<span>| 张文龙</span></h1>
+                
+                <p class="intro">
+                    I am currently pursuing a Bachelor's Degree in Bioinformatics at Southern Medical University, China. 
+                    My research interests include biomedical data analysis, machine learning applications in health and genomic data.
                 </p>
-                <div class="project-tags">
-                    <span class="tag">R</span>
-                    <span class="tag">Cox 回归</span>
-                    <span class="tag">生存分析</span>
-                    <span class="tag">MICE 多重插补</span>
-                    <span class="tag">PCA</span>
-                    <span class="tag">K-prototypes 聚类</span>
-                </div>
-                <div class="project-highlights">
-                    <span>📊 特征工程：日内/日间活动变异性、MVPA 模式分类</span>
-                    <span>🔬 统计建模：Cox、线性、GAM、RCS 非线性模型</span>
-                    <span>⚙️ 完整流程：数据清洗 → 特征构建 → 生存分析</span>
-                </div>
-            </div>
-            
-        </section>
 
-        <!-- 联系方式 -->
-        <section class="card" style="animation-delay: 0.5s;">
-            <div class="section-title">
-                <i class="fas fa-paper-plane"></i> 联系我
-            </div>
-            <div class="contact-links">
-                <a href="mailto:welon0725@outlook.com" class="contact-link">
-                    <i class="fas fa-envelope"></i>
-                    <span>welon0725@outlook.com</span>
-                </a>
-                <a href="https://github.com/blitz305" target="_blank" class="contact-link">
-                    <i class="fab fa-github"></i>
-                    <span>GitHub</span>
-                </a>
-            </div>
-        </section>
+                <div class="section-title">Education</div>
+                <div class="education-item">
+                    <strong>Southern Medical University</strong>
+                    <p>B.S. in Bioinformatics (Expected 20XX)</p>
+                </div>
 
-        <footer>
-            © 2025 Blitz · Built with ❤️
-        </footer>
+                <div class="section-title">Research Interests</div>
+                <ul class="research-list">
+                    <li>生物医学数据处理流程构建</li>
+                    <li>机器学习在健康与基因组数据中的应用</li>
+                    <li>R 与 Python 工作流自动化</li>
+                </ul>
+
+                <div class="section-title">Skills</div>
+                <ul class="research-list">
+                    <li><strong>R:</strong> 数据可视化、生存分析</li>
+                    <li><strong>Python:</strong> 机器学习基础、数据预处理</li>
+                </ul>
+            </div>
+        </div>
     </div>
+
+    <!-- PUBLICATIONS & AWARDS 页面 -->
+    <div id="publications" class="page-section">
+        <h2>Publications</h2>
+        
+        <div class="placeholder">
+            <i class="fas fa-file-alt" style="font-size: 2em; margin-bottom: 10px;"></i>
+            <p>[ 论文信息占位 ]</p>
+            <p style="font-size: 0.85em; margin-top: 10px;">请提供：论文标题、作者列表、期刊/会议、年份</p>
+        </div>
+
+        <h2 class="sub-section">Awards</h2>
+        
+        <div class="placeholder">
+            <i class="fas fa-trophy" style="font-size: 2em; margin-bottom: 10px;"></i>
+            <p>[ 获奖信息占位 ]</p>
+            <p style="font-size: 0.85em; margin-top: 10px;">请提供：奖项名称、颁发机构、年份</p>
+        </div>
+    </div>
+
+    <!-- PROJECTS 页面 -->
+    <div id="projects" class="page-section">
+        <h2>Projects</h2>
+        
+        <div class="project-item">
+            <div class="project-header">
+                <span class="project-name">🧠 UKB 身体活动规律性与痴呆风险研究</span>
+                <a href="https://github.com/blitz305/ukb-pa-regularity-dementia" target="_blank" class="project-link">
+                    <i class="fab fa-github"></i> Repository
+                </a>
+            </div>
+            <p class="project-desc">
+                基于 UK Biobank 加速度计数据，构建身体活动规律性评分体系，分析其与痴呆发病风险及认知功能的关联。
+            </p>
+            <div class="project-tags">
+                <span class="tag">R</span>
+                <span class="tag">Cox Regression</span>
+                <span class="tag">Survival Analysis</span>
+                <span class="tag">MICE</span>
+                <span class="tag">PCA</span>
+                <span class="tag">K-prototypes</span>
+            </div>
+            <ul class="project-highlights">
+                <li>特征工程：日内/日间活动变异性、MVPA 模式分类</li>
+                <li>统计建模：Cox、线性、GAM、RCS 非线性模型</li>
+                <li>完整流程：数据清洗 → 特征构建 → 生存分析</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <footer>
+        © 2025 Wenlong Zhang
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`a[href="#${pageId}"]`).classList.add('active');
+            
+            window.scrollTo(0, 0);
+        }
+    </script>
 </body>
 
 </html>
